@@ -5,8 +5,10 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-
+import { AppProvider } from "@shopify/polaris";
 import "./tailwind.css";
+import "@shopify/polaris/build/esm/styles.css";
+import { UserDataProvider } from "./context/UserDataProvider";
 
 export const links = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -40,5 +42,12 @@ export function Layout({ children }) {
 }
 
 export default function App() {
-  return <Outlet />;
-}
+  return (
+    <AppProvider>
+      <UserDataProvider>
+        <Outlet />
+      </UserDataProvider>
+    </AppProvider>
+  );
+};
+
